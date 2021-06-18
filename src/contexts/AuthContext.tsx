@@ -33,7 +33,6 @@ export function AuthProvider({ children }: any) {
   async function signIn({ email, password }: SignInData) {
     try {
       const { data } = await postToken({ email, password })
-      console.log(data)
       setCookie(undefined, 'miira-token', data.token, {
         maxAge: 60 * 60 * 1 //1 hora
       })

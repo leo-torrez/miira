@@ -1,16 +1,9 @@
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import * as S from './styles'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
-import {
-  faRulerHorizontal,
-  faExternalLinkAlt
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ListCardItem from './ListCardItem'
+import { ESTADOS } from 'json/estados/estados'
 
-import IMAGE_IMOVEL from 'assets/images/imovel.jpg'
-import IMAGE_IMOVEL_2 from 'assets/images/search-background.jpg'
 const Map = dynamic(() => import('components/Map'), { ssr: false })
 
 type Properties = {
@@ -58,8 +51,22 @@ const renderProperties = (properties: Properties[]) => {
   ))
 }
 
-const ListaImoveis = ({ properties }: any) => {
+const getInfoStateSelected = (state: any) => {
+  return ESTADOS.filter((estado) => state == estado.cod).map((estado) => {
+    return {
+      cod: estado.cod,
+      uf: estado.uf,
+      uf_cod: estado.uf_cod,
+      latitude: JSON.parse(estado.lat_lon)[0],
+      longitude: JSON.parse(estado.lat_lon)[1],
+      zoom: estado.zoom
+    }
+  })[0]
+}
+
+const ListaImoveis = ({ properties, state }: any) => {
   const listProperties = renderProperties(properties)
+  const state_latitude_longitude = getInfoStateSelected(state)
 
   const [showSubMenu, setShowSubMenu] = useState(false)
   return (
@@ -86,7 +93,20 @@ const ListaImoveis = ({ properties }: any) => {
         </S.WrapperListItem>
       </S.LeftColumn>
       <S.RightColumn>
-        <Map />
+        <Map
+          state={state_latitude_longitude}
+          places={[
+            {
+              id: '01',
+              location: {
+                latitude: -23.58585,
+                longitude: -46.67313
+              },
+              name: 'São Paulo',
+              slug: 'sp'
+            }
+          ]}
+        />
       </S.RightColumn>
     </S.Wrapper>
   )

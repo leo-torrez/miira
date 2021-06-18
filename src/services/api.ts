@@ -18,7 +18,6 @@ interface Form {
 
 axios.interceptors.response.use(
   (response) => {
-    console.log('teste')
     if (response.status === 401) {
       alert('You are not authorized')
     }
@@ -45,7 +44,6 @@ export const postToken = ({ email, password }: Authenticated) => {
 
 export const getMunicipalities = (value: string) => {
   const header = createHeader()
-  console.log(header)
   return axios.get(
     `https://miiraapi.azurewebsites.net/api/municipios/estado/${value}/`,
     header

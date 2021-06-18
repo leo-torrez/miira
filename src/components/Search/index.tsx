@@ -89,6 +89,7 @@ const renderSectors = (sectors: Sectors[]) => {
 
 const Search = ({ showResult = true }: Search) => {
   const { register, handleSubmit } = useForm()
+  const [states, setstates] = useState('')
   const [municipalities, setMunicipalities] = useState([])
   const [sectors, setSectors] = useState([])
   const [properties, setProperties] = useState<Properties[]>([])
@@ -99,6 +100,12 @@ const Search = ({ showResult = true }: Search) => {
 
   async function LoadMunicipalities(value: string) {
     try {
+      if (!value || value == '') {
+        setMunicipalities([])
+        setSectors([])
+        return
+      }
+      setstates(value)
       const { data } = await getMunicipalities(value)
       setMunicipalities(data.data.municipios)
     } catch (e) {
@@ -148,6 +155,9 @@ const Search = ({ showResult = true }: Search) => {
           <S.Select
             {...register('municipality')}
             onChange={(e) => LoadSectors(e.target.value)}
+            disabled={
+              municipalities && municipalities.length > 0 ? false : true
+            }
           >
             <option value="" selected>
               Municipio
@@ -156,7 +166,10 @@ const Search = ({ showResult = true }: Search) => {
               municipalities.length > 0 &&
               createMunicipalities}
           </S.Select>
-          <S.Select {...register('sector')}>
+          <S.Select
+            {...register('sector')}
+            disabled={sectors && sectors.length > 0 ? false : true}
+          >
             <option value="">Setor</option>
             {sectors && sectors.length > 0 && createSectors}
           </S.Select>
@@ -166,7 +179,7 @@ const Search = ({ showResult = true }: Search) => {
         </S.Form>
       </S.Wrapper>
       {properties && properties.length > 0 && (
-        <ListaImoveis properties={properties} />
+        <ListaImoveis state={states} properties={properties} />
       )}
     </>
   )
