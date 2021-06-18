@@ -12,13 +12,13 @@ const Map = dynamic(() => import('components/Map'), { ssr: false })
 
 interface ListCardItem {
   rua?: string
-  image?: string
+  image: string
   bairro?: string
   metros?: string
   transito?: string
-  razaoSocial?: string;
-  indSimples?: number;
-  tamanhoEstabelecimento?: number;
+  razaoSocial?: string
+  indSimples?: number
+  tamanhoEstabelecimento?: number
 }
 
 const ListCardItem = ({
