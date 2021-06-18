@@ -13,9 +13,9 @@ export default function Home() {
       <Sidebar />
 
       <Container>
-        <Search showResult={true} />
-        {/* <Featured />
-        <ImoveisFavoritos /> */}
+        <Search showResult={false} />
+        <Featured />
+        <ImoveisFavoritos />
       </Container>
     </ContainerFull>
   )
