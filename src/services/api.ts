@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { parseCookies } from 'nookies'
-
+import Router from 'next/router'
+import { parseCookies, destroyCookie } from 'nookies'
 type Authenticated = {
   email: string
   password: string
@@ -15,6 +15,27 @@ interface Form {
   municipality: string
   sector: string
 }
+
+axios.interceptors.response.use(
+  (response) => {
+    console.log('teste')
+    if (response.status === 401) {
+      alert('You are not authorized')
+    }
+    return response
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      Router.push('/login')
+      destroyCookie(null, 'miira-token')
+    }
+    if (error.response && error.response.data) {
+      return Promise.reject(error.response.data)
+    }
+    return Promise.reject(error.message)
+  }
+)
+
 export const postToken = ({ email, password }: Authenticated) => {
   return axios.post(`https://miiraapi.azurewebsites.net/api/login/`, {
     email,
