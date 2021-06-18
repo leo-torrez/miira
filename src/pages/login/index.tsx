@@ -12,7 +12,7 @@ import {
   Input,
   Label,
   Button
-} from './ContainerLogin'
+} from 'components/ContainerLogin'
 import { AuthContext } from 'contexts/AuthContext'
 
 interface LoginForm {
