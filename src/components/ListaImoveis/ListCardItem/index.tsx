@@ -12,7 +12,6 @@ const Map = dynamic(() => import('components/Map'), { ssr: false })
 
 interface ListCardItem {
   rua?: string
-  image: string
   bairro?: string
   metros?: string
   transito?: string
@@ -22,25 +21,36 @@ interface ListCardItem {
 }
 
 const ListCardItem = ({
-  image,
   bairro,
   rua,
-  metros,
-  transito
+  razaoSocial,
+  indSimples,
+  tamanhoEstabelecimento
 }: ListCardItem) => (
   <S.Wrapper>
-    <S.Image image={image} />
+    <S.Image />
     <S.Description>
       <S.Rua>{rua}</S.Rua>
       <S.Bairro>{bairro}</S.Bairro>
       <S.InfoAdicionais>
-        <S.Tamanho>
-          <p> {metros}</p>
-          <FontAwesomeIcon icon={faRulerHorizontal} />
-        </S.Tamanho>
         <S.Transito>
-          <p> {transito}</p>
-          <FontAwesomeIcon icon={faTrafficLight} />
+          <p>
+            {' '}
+            <strong>Razão Social:</strong> <span>{razaoSocial}</span>
+          </p>
+        </S.Transito>
+        <S.Transito>
+          <p>
+            {' '}
+            <strong>Tamanho do Estabelecimento:</strong>{' '}
+            <span>{tamanhoEstabelecimento}</span>
+          </p>
+        </S.Transito>
+        <S.Transito>
+          <p>
+            {' '}
+            <strong>Ind_Simples:</strong> <span>{indSimples}</span>
+          </p>
         </S.Transito>
       </S.InfoAdicionais>
       <S.Favoritar>

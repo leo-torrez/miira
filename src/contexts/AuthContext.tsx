@@ -40,7 +40,7 @@ export function AuthProvider({ children }: any) {
 
       setToken(data.token)
 
-      Router.push('/home')
+      Router.push('/')
     } catch (error) {
       console.log('error')
     }

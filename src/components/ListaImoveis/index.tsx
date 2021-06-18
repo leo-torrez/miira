@@ -51,7 +51,6 @@ const renderProperties = (properties: Properties[]) => {
       key={`${property.CNAE}_${index}`}
       rua={`${property.Nome_Logradouro} - ${property.Numero_Logradouro}`}
       bairro={property.LOC}
-      image={IMAGE_IMOVEL}
       razaoSocial={property.Razao_Social}
       tamanhoEstabelecimento={property.Tamanho_Estabelecimento}
       indSimples={property.Ind_Simples}
@@ -66,7 +65,7 @@ const ListaImoveis = ({ properties }: any) => {
   return (
     <S.Wrapper>
       <S.LeftColumn>
-        <S.Filtros>
+        {/* <S.Filtros>
           <ul>
             <li onClick={() => setShowSubMenu(!showSubMenu)}>
               Trânsito
@@ -81,7 +80,7 @@ const ListaImoveis = ({ properties }: any) => {
               {showSubMenu && <div>Filtros para categoria Metros</div>}
             </li>
           </ul>
-        </S.Filtros>
+        </S.Filtros> */}
         <S.WrapperListItem>
           {properties && properties.length > 0 && listProperties}
         </S.WrapperListItem>

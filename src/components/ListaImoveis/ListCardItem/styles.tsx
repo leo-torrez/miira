@@ -22,16 +22,16 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const Image = styled.div<BackgroundImage>`
-  width: 250px;
+export const Image = styled.div`
+  width: 150px;
   height: 100%;
-  background-image: url(${(props) => props.image});
+  background-color: #d1d1d1;
   background-size: cover;
   border-radius: 10px;
 `
 
 export const Description = styled.div`
-  width: calc(100% - 250px);
+  width: calc(100% - 150px);
   padding: 2px 10px;
   position: relative;
 `
@@ -81,6 +81,9 @@ export const Transito = styled.div`
   p {
     order: 2;
     font-size: 1.3rem;
+    span {
+      text-transform: capitalize;
+    }
   }
   svg {
     order: 1;

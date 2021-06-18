@@ -11,9 +11,9 @@ type Value = {
 }
 
 interface Form {
-  state: string;
-  municipality: string;
-  sector: string;
+  state: string
+  municipality: string
+  sector: string
 }
 export const postToken = ({ email, password }: Authenticated) => {
   return axios.post(`https://miiraapi.azurewebsites.net/api/login/`, {
@@ -32,7 +32,7 @@ export const getMunicipalities = (value: string) => {
 }
 
 export const getSectorsByMunicipality = (value: string) => {
-  const newValue = value.slice(0, -1);
+  const newValue = value.slice(0, -1)
   const header = createHeader()
   return axios.get(
     `https://miiraapi.azurewebsites.net/api/setores/municipio/${newValue}/`,
@@ -40,8 +40,8 @@ export const getSectorsByMunicipality = (value: string) => {
   )
 }
 
-export const getListPropeties = ({state, municipality, sector}: Form) => {
-  const newCodMunicipality = municipality.slice(0, -1);
+export const getListPropeties = ({ state, municipality, sector }: Form) => {
+  const newCodMunicipality = municipality.slice(0, -1)
   const header = createHeader()
   return axios.get(
     `https://miiraapi.azurewebsites.net/api/places/estado/${state}/municipio/${newCodMunicipality}/cnae/${sector}/`,
